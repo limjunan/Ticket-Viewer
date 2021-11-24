@@ -7,7 +7,7 @@ app = Flask(__name__)
 # main application route
 @app.route("/")
 def login():
-    return render_template('login.html')
+    return render_template('authenticate.html')
 
 @app.route("/index")
 def index():
