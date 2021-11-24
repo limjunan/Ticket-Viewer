@@ -1,5 +1,5 @@
-class user():
-    def __init__(self, client_id, client_secret, client_url, code):
+class User():
+    def __init__(self, client_id, client_secret, client_url, code=None):
         self.client_id = client_id
         self.client_secret = client_secret
-        client_url = client_url
+        self.client_url = client_url

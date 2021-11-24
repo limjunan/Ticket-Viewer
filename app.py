@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect
+from user import User
 import requests
 
 from forms import AuthenticationForm
@@ -14,8 +15,10 @@ def authenticate():
     authenticationForm = AuthenticationForm()
 
     if authenticationForm.validate_on_submit():
+        user = User(authenticationForm.client_id.data, authenticationForm.client_secret.data, 
+                    authenticationForm.client_url.data)
         
-        redirect('/index')
+        redirect(f'https://{user.client_url}.zendesk.com/oauth/authorizations/new?response_type=code&redirect_uri=http://127.0.0.1:5000&client_id={user.client_id}&scope=read')
 
     return render_template('authenticate.html', form=authenticationForm, title='Authentication')
 
