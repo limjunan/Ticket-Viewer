@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authenticate</title>
-</head>
-<body>
-    <h1>Authenticate</h1>
-    <div>
-        <form method="POST" action="">
-            <!-- CSRF token -->
-            {{ form.hidden_tag() }} 
-            <div>
-                {{ form.client_id.label() }}
-                {{ form.client_id() }}
-            </div>
-            <div>
-                {{ form.client_secret.label() }}
-                {{ form.client_secret() }}
-            </div>
-            <div>
-                {{ form.submit(class='btn') }}
-            </div>
-        </form>
-    </div>
-</body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>Authenticate</h1>
+<div>
+    <form method="POST" action="">
+        <!-- CSRF token -->
+        {{ form.hidden_tag() }} 
+        <div>
+            {{ form.client_id.label() }}
+            {{ form.client_id() }}
+        </div>
+        <div>
+            {{ form.client_secret.label() }}
+            {{ form.client_secret() }}
+        </div>
+        <div>
+            {{ form.submit(class='btn') }}
+        </div>
+    </form>
+</div>
+
+{% endblock %}

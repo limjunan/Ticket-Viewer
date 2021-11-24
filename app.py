@@ -13,11 +13,11 @@ app.config['SECRET_KEY'] = 'b8aZENDESKffba7ea03b21aZENDESK93'
 @app.route("/")
 def authenticate():
     authenticationForm = AuthenticationForm()
-    return render_template('authenticate.html', form=authenticationForm)
+    return render_template('authenticate.html', form=authenticationForm, title='Authentication')
 
 @app.route("/index")
 def index():
-    return render_template('index.html')
+    return render_template('index.html', title='Index')
 
 if __name__ == '__main__':
     app.run(debug=True)
