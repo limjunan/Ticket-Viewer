@@ -2,6 +2,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
+# main application route
 @app.route("/")
 def init():
     return render_template('index.html')
