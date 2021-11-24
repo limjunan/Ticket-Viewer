@@ -4,6 +4,9 @@ import requests
 
 app = Flask(__name__)
 
+# secret key
+app.config['SECRET_KEY'] = 'b8aZENDESKffba7ea03b21aZENDESK93'
+
 # main application route
 @app.route("/")
 def login():
