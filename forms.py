@@ -5,4 +5,5 @@ from wtforms.validators import DataRequired
 class AuthenticationForm(FlaskForm):
     client_id = StringField('Client ID: ', validators=[DataRequired()])
     client_secret = PasswordField('Client Secret: ', validators=[DataRequired()])
+    client_url = StringField('Subdomain: ', validators=[DataRequired()])
     submit = SubmitField('Authenticate')

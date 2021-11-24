@@ -7,6 +7,10 @@
         <!-- CSRF token -->
         {{ form.hidden_tag() }} 
         <div class='form-group'>
+            {{ form.client_url.label() }}
+            {{ form.client_url() }}
+        </div>
+        <div class='form-group'>
             {{ form.client_id.label() }}
             {{ form.client_id() }}
         </div>
