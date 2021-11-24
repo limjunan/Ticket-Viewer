@@ -8,5 +8,22 @@
 </head>
 <body>
     <h1>Authenticate</h1>
+    <div>
+        <form method="POST" action="">
+            <!-- CSRF token -->
+            {{ form.hidden_tag() }} 
+            <div>
+                {{ form.client_id.label() }}
+                {{ form.client_id() }}
+            </div>
+            <div>
+                {{ form.client_secret.label() }}
+                {{ form.client_secret() }}
+            </div>
+            <div>
+                {{ form.submit(class='btn') }}
+            </div>
+        </form>
+    </div>
 </body>
 </html>
