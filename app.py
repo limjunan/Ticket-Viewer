@@ -13,10 +13,10 @@ def authenticate():
     authenticationForm = AuthenticationForm()
 
     if authenticationForm.validate_on_submit():
-        return getAuthorizationCode(authenticationForm)
+        authorizationCode = getAuthorizationCode(authenticationForm)
+        return authorizationCode
         
     if request.args.get('code'):
-        
         code = request.args.get('code')
         return getTickets(code)
 

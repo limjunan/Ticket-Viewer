@@ -1,4 +1,5 @@
 from flask import session, redirect, flash, render_template
+from forms import AuthenticationForm
 import requests, json
 
 def getAuthorizationCode(authenticationForm):
@@ -21,10 +22,11 @@ def getTickets(code):
         "redirect_uri": "http://127.0.0.1:5000",
         "scope": "read" }
 
-    accessToken = requests.post(redirect_url, headers=headers, data=json.dumps(data))
-    accessToken = accessToken.json()
+    access_token = requests.post(redirect_url, headers=headers, data=json.dumps(data))
+    print('             ',access_token.text)
+    accessToken = access_token.json()
     
-    if 'access_token' in accessToken:
+    if access_token.status_code == 200:
         access_token = accessToken['access_token']
 
         # get tickets information json
@@ -33,5 +35,6 @@ def getTickets(code):
         tickets = requests.get(redirect_url, headers=headers)
         ticketsJSON = tickets.json()
         return render_template('index.html', title='Index', tickets = ticketsJSON['tickets'])
-    elif 'error' in accessToken:
-        flash(f'ERROR: { accessToken["error"] }', 'error')
+    elif access_token.status_code == 401:
+        flash(f'ERROR { accessToken["error"] }: { accessToken["error_description"] }', 'error')
+        return render_template('authenticate.html', form=AuthenticationForm(), title='Authentication')
