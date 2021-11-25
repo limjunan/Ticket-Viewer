@@ -53,18 +53,11 @@ def authenticate():
             headers={'Authorization': f'Bearer {access_token}'}
             tickets = requests.get(redirect_url, headers=headers)
             ticketsJSON = tickets.json()
-            session['tickets'] = ticketsJSON['tickets']
-            return redirect(url_for('index'))
+            return render_template('index.html', title='Index', tickets = ticketsJSON['tickets'])
         elif 'error' in accessToken:
             flash(f'ERROR: { accessToken["error"] }', 'error')
-        
-
 
     return render_template('authenticate.html', form=authenticationForm, title='Authentication')
-
-@app.route("/index",methods=['POST', 'GET'])
-def index():
-    return render_template('index.html', title='Index')
 
 if __name__ == '__main__':
     app.run(debug=True)
