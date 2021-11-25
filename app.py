@@ -18,14 +18,12 @@ def authenticate():
     authenticationForm = AuthenticationForm()
 
     if authenticationForm.validate_on_submit():
-        user = User(authenticationForm.client_id.data, authenticationForm.client_secret.data, 
-                    authenticationForm.client_url.data)
         session['client_id'] = authenticationForm.client_id.data
         session['client_secret'] = authenticationForm.client_secret.data
         session['client_url'] = authenticationForm.client_url.data
 
         # get oauth code
-        redirect_url = f'https://{ user.client_url }.zendesk.com/oauth/authorizations/new?response_type=code&redirect_uri=http://127.0.0.1:5000&client_id={ user.client_id }&scope=read'
+        redirect_url = f'https://{ session["client_url"] }.zendesk.com/oauth/authorizations/new?response_type=code&redirect_uri=http://127.0.0.1:5000&client_id={ session["client_id"]}&scope=read'
         return redirect(redirect_url)
         
 
