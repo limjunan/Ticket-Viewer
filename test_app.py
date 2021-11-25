@@ -1,0 +1,5 @@
+from app import app
+import unittest
+
+if __name__ == '__main__':
+    unittest.main()
