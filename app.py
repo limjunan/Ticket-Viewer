@@ -1,7 +1,8 @@
 from os import access
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, session
 from user import User
 import requests, json
+
 
 from forms import AuthenticationForm
 
@@ -18,32 +19,41 @@ def authenticate():
     if authenticationForm.validate_on_submit():
         user = User(authenticationForm.client_id.data, authenticationForm.client_secret.data, 
                     authenticationForm.client_url.data)
-        
+        session['client_id'] = authenticationForm.client_id.data
+        session['client_secret'] = authenticationForm.client_secret.data
+        session['client_url'] = authenticationForm.client_url.data
+
         # get oauth code
         redirect_url = f'https://{ user.client_url }.zendesk.com/oauth/authorizations/new?response_type=code&redirect_uri=http://127.0.0.1:5000&client_id={ user.client_id }&scope=read'
-        redirect(redirect_url)
+        return redirect(redirect_url)
+        
+
+    if request.args.get('code'):
+        
         code = request.args.get('code')
-        print('             ',code)
         # get oauth access token
-        redirect_url = f'https://{ user.client_url }.zendesk.com/oauth/tokens'
+        redirect_url = f'https://{ session["client_url"] }.zendesk.com/oauth/tokens'
         headers={ 'Content-Type': 'application/json'}
         data={"grant_type": "authorization_code",
             "code": code,
-            "client_id": user.client_id,
-            "client_secret": user.client_secret,
+            "client_id": session["client_id"],
+            "client_secret": session["client_secret"],
             "redirect_uri": "http://127.0.0.1:5000",
             "scope": "read" }
 
-        accessToken = requests.post(redirect_url, headers=headers, data=json.dumps(data)).json()
-        print('                 ',accessToken)
-        access_token = accessToken['access_token']
+        accessToken = requests.post(redirect_url, headers=headers, data=json.dumps(data))
+        accessToken = accessToken.json()
+        
+        if 'access_token' in accessToken:
+            access_token = accessToken['access_token']
 
-        # get tickets information json
-        redirect_url = f'https://{ user.client_url }.zendesk.com/api/v2/tickets.json'
-        headers={'Authorization': f'Bearer {access_token}'}
-        tickets = requests.get(redirect_url, headers=headers)
+            # get tickets information json
+            redirect_url = f'https://{ session["client_url"] }.zendesk.com/api/v2/tickets.json'
+            headers={'Authorization': f'Bearer {access_token}'}
+            tickets = requests.get(redirect_url, headers=headers)
 
-        print(tickets)
+            print(tickets.json())
+        
 
 
     return render_template('authenticate.html', form=authenticationForm, title='Authentication')
