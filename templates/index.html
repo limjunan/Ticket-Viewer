@@ -3,4 +3,8 @@
 
 <h1>Zendesk Ticket Viewer</h1>
 
+{% for ticket in session['tickets'] %}
+    <p><strong>{{ ticket.id }}.</strong> {{ ticket.channel }} {{ ticket.subject }}</p>
+{% endfor %}
+
 {% endblock %}

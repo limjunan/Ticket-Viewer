@@ -52,7 +52,8 @@ def authenticate():
             redirect_url = f'https://{ session["client_url"] }.zendesk.com/api/v2/tickets.json'
             headers={'Authorization': f'Bearer {access_token}'}
             tickets = requests.get(redirect_url, headers=headers)
-            session['tickets'] = tickets.json()
+            ticketsJSON = tickets.json()
+            session['tickets'] = ticketsJSON['tickets']
             return redirect(url_for('index'))
         elif 'error' in accessToken:
             flash(f'ERROR: { accessToken["error"] }', 'error')
