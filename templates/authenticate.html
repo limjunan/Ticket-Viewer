@@ -6,6 +6,7 @@
     <form method="POST" action="">
         <!-- CSRF token -->
         {{ form.hidden_tag() }} 
+        
         <div class='form-group'>
             {{ form.client_url.label() }}
             {{ form.client_url() }}
