@@ -1,5 +1,6 @@
 from os import access
 from flask import Flask, render_template, redirect, request, session, flash
+from flask.helpers import url_for
 from user import User
 import requests, json
 
@@ -51,8 +52,8 @@ def authenticate():
             redirect_url = f'https://{ session["client_url"] }.zendesk.com/api/v2/tickets.json'
             headers={'Authorization': f'Bearer {access_token}'}
             tickets = requests.get(redirect_url, headers=headers)
-
-            print(tickets.json())
+            session['tickets'] = tickets.json()
+            return redirect(url_for('index'))
         elif 'error' in accessToken:
             flash(f'ERROR: { accessToken["error"] }', 'error')
         
