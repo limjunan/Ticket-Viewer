@@ -1,5 +1,5 @@
 from os import access
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session, flash
 from user import User
 import requests, json
 
@@ -53,6 +53,8 @@ def authenticate():
             tickets = requests.get(redirect_url, headers=headers)
 
             print(tickets.json())
+        elif 'error' in accessToken:
+            flash(f'ERROR: { accessToken["error"] }', 'error')
         
 
 
