@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div>
+    <h1>Ticket {{ ticket['id'] }}</h1>
+    <p>{{ ticket.subject }}</p>
+    
+    <a href='/'>Back</a>
+</div>
+
+{% endblock %}

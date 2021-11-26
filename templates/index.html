@@ -4,7 +4,9 @@
 <h1>Zendesk Ticket Viewer</h1>
 
 {% for ticket in tickets %}
-    <p><strong>{{ ticket.id }}.</strong> {{ ticket.channel }} {{ ticket.subject }}</p>
+    <a href="{{ url_for('displayTicket', ticketid=ticket.id) }}">
+        <p><strong>{{ ticket.id }}.</strong> {{ ticket.channel }} {{ ticket.subject }} Date: {{ ticket.updated_at[:-10] }}</p>
+    </a>
 {% endfor %}
 
 {% endblock %}
