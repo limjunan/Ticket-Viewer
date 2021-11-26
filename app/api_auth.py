@@ -2,9 +2,6 @@ from flask import session, redirect
 import requests, json
 
 def getAuthorizationCode(client_id, client_url):
-    session['client_id'] = client_id
-    session['client_url'] = client_url
-
     # get oauth code
     redirect_url = f'https://{ client_url }.zendesk.com/oauth/authorizations/new?response_type=code&redirect_uri=http://127.0.0.1:5000&client_id={ client_id }&scope=read'
     return redirect(redirect_url)
