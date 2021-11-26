@@ -30,14 +30,14 @@ def authenticate():
                              session['client_id'],
                              session['client_secret'],
                              session['client_url'])
-        accessTokenJSON = accessToken.json()
-        session['access_token'] = accessTokenJSON['access_token']
+        
         if accessToken.status_code == 200:
+            accessTokenJSON = accessToken.json()
+            session['access_token'] = accessTokenJSON['access_token']
             return(redirect(url_for('listTickets')))
-            
         else:
-            flash('ERROR', 'error')
-            return render_template(url_for('authenticate'), form=AuthenticationForm(), title='Authentication')
+            flash('ERROR: invalid client secret', 'error')
+            return render_template('authenticate.html', form=AuthenticationForm(), title='Authentication')
 
     return render_template('authenticate.html', form=authenticationForm, title='Authentication')
 
@@ -48,10 +48,14 @@ def listTickets():
 
 @app.route('/ticket', methods=['GET', 'POST'])
 def displayTicket():
-    ticketid = request.args.get('ticketid')
-    print('         ',ticketid)
-    ticket = getTicket(ticketid, session['access_token'], session['client_url'])
-    return render_template('ticket.html', ticket=ticket, title='ticket')
+    if session['access_token']:
+        ticketid = request.args.get('ticketid')
+        print('         ',ticketid)
+        ticket = getTicket(ticketid, session['access_token'], session['client_url'])
+        return render_template('ticket.html', ticket=ticket, title='ticket')
+    else:
+        flash('ERROR: access code', 'error')
+        return redirect(url_for('authenticate'))
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@
     <h1>Ticket {{ ticket['id'] }}</h1>
     <p>{{ ticket.subject }}</p>
     
-    <a href='/'>Back</a>
+    <a href='{{ url_for("listTickets") }}'>Back</a>
 </div>
 
 {% endblock %}
