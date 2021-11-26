@@ -1,13 +1,87 @@
+# local imports
 from api_auth import *
-import unittest
+from api_url import API_URL
+from ticket_handler import TicketHandler
+from api_auth import ApiAuthentication
+
+# stl imports
+import unittest,json
+from unittest.mock import Mock, patch
 
 class testAPIHandling(unittest.TestCase):
-     def test_getAuthCode(self):
-         self.assertTrue(getAuthorizationCode(client_id, subdomain))
+
+    # API CHECKING UNIT TESTS (api_url.py)
+
+    @patch('api_url.requests.get')
+    def test_CheckAPIState_OK_Response(self, mock_get):
+        # configure the mock to return a response with an OK status code.
+        mock_get.return_value.ok = True
+
+        response = API_URL.checkAPIState(API_URL.getSubdomainURL(subdomain))
+
+        self.assertIsNotNone(response)
+
+    @patch('api_url.requests.get')
+    def test_CheckAPIState_NotOK_Response(self, mock_get):
+        # configure the mock to return a response with an OK status code.
+        mock_get.return_value.ok = False
+
+        response = API_URL.checkAPIState(API_URL.getSubdomainURL(subdomain))
+
+        self.assertIsNone(response)
+
+
+    # TICKET HANDLER UNIT TESTS (ticket_handler.py)
+
+    @patch('ticket_handler.requests.get')
+    def test_getTickets_OK_Response(self, mock_get):
+        # configure the mock to return mock tickets json
+        with open("mock_tickets.json") as f:
+            mock_tickets = json.load(f)
+
+        mock_get.return_value = Mock(ok=True)
+        mock_get.return_value.json.return_value = mock_tickets
+
+        response = TicketHandler.getTickets('random access token', 'random url')
+
+        self.assertListEqual(response, mock_tickets['tickets'])
+
+    @patch('ticket_handler.requests.get')
+    def test_getTickets_NotOK_Response(self, mock_get):
+        # configure the mock to not return a response with an OK status code.
+        mock_get.return_value.ok = False
+
+        response = TicketHandler.getTickets('random access token', 'random url')
+
+        self.assertIsNone(response)
+
+    @patch('ticket_handler.requests.get')
+    def test_getTicket_OK_Response(self, mock_get):
+        # configure the mock to return mock ticket json
+        with open("mock_ticket.json") as f:
+            mock_ticket = json.load(f)
         
+        mock_get.return_value = Mock(ok=True)
+        mock_get.return_value.json.return_value = mock_ticket
+
+        response = TicketHandler.getTicket('random ticket id', 'random access token', 'random url')
+
+        self.assertListEqual(response, mock_ticket['ticket'])
+    
+    @patch('ticket_handler.requests.get')
+    def test_getTicket_NotOK_Response(self, mock_get):
+        # configure the mock to not return a response with an OK status code.
+        mock_get.return_value.ok = False
+
+        response = TicketHandler.getTicket('random ticket id', 'random access token', 'random url')
+
+        self.assertIsNone(response)
+    
+
+    # API AUTHENTICATION UNIT TESTS
+
+
 
 if __name__ == '__main__':
     subdomain = input('Your subdomain: ')
-    client_id = input('Your OAUTH ID: ')
-    client_secret = input('Your OAUTH secret: ')
     unittest.main()
