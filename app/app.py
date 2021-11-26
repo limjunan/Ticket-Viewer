@@ -15,17 +15,17 @@ app.config['SECRET_KEY'] = 'b8aZENDESKffba7ea03b21aZENDESK93'
 # main application route
 @app.route("/", methods=['POST', 'GET'])
 def authenticate():
-    # error handling for down api
-    if API_URL.checkAPIState(API_URL.getSubdomainURL(session['client_url'])) is None:
-        flash('ERROR: API is down', 'error')
-        return render_template('authenticate.html', form=AuthenticationForm(), title='Authentication')
-
     authenticationForm = AuthenticationForm()
 
     if authenticationForm.validate_on_submit(): 
         session['client_id'] = authenticationForm.client_id.data
         session['client_secret'] = authenticationForm.client_secret.data
         session['client_url'] = authenticationForm.client_url.data
+
+        # error handling for down api
+        if API_URL.checkAPIState(API_URL.getSubdomainURL(session['client_url'])) is None:
+            flash('ERROR: API is down', 'error')
+            return render_template('authenticate.html', form=AuthenticationForm(), title='Authentication')
 
         authorizationCode = ApiAuthentication.getAuthorizationCode(session['client_id'],
                                                 session['client_url'])
