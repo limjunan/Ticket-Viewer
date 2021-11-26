@@ -1,4 +1,4 @@
-from app.api_auth import *
+from api_auth import *
 import unittest
 
 class testAPIHandling(unittest.TestCase):

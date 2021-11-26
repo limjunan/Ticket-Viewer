@@ -1,11 +1,8 @@
-from os import access
-from urllib import parse
 from flask import Flask, render_template, redirect, request, session, flash, url_for
+
 from forms import AuthenticationForm
 from api_auth import *
 from ticket_handler import *
-from urllib.parse import unquote, unquote_plus, parse_qs
-from json import dumps
 
 app = Flask(__name__)
 
@@ -50,7 +47,6 @@ def listTickets():
 def displayTicket():
     if session['access_token']:
         ticketid = request.args.get('ticketid')
-        print('         ',ticketid)
         ticket = getTicket(ticketid, session['access_token'], session['client_url'])
         return render_template('ticket.html', ticket=ticket, title='ticket')
     else:

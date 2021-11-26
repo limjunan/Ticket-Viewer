@@ -1,5 +1,4 @@
-from flask import session, redirect, flash, render_template
-from app.forms import AuthenticationForm
+from flask import session, redirect
 import requests, json
 
 def getAuthorizationCode(client_id, client_url):
