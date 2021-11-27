@@ -6,6 +6,7 @@ from forms import AuthenticationForm
 from api_auth import *
 from ticket_handler import *
 from api_url import *
+from constants import *
 
 app = Flask(__name__)
 
@@ -66,7 +67,7 @@ def listTickets():
         tickets = TicketHandler.getTickets(session['access_token'], session['client_url'])
 
     if tickets:
-        if tickets['meta']['has_more']:
+        if ticket_count > Constants.items_per_page:
             return render_template('index.html', title='Index', tickets=tickets['tickets'], 
                                     next=tickets['links']['next'], prev=tickets['links']['prev'],
                                     ticket_count=ticket_count)

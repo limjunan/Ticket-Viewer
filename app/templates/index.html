@@ -8,10 +8,11 @@
     </a>
 {% endfor %}
 
-{% if (tickets[0]['id'] != 1) %}
+
+{% if (tickets[0]['id'] != 1) and prev %}
     <a href="{{ url_for('listTickets', prev=prev) }}"><p>Prev</p></a>
 {% endif %}
-{% if next %}
+{% if (tickets[-1]['id'] != ticket_count) and next %}
 <a href="{{ url_for('listTickets', next=next) }}"><p>Next</p></a>
 {% endif %}
 

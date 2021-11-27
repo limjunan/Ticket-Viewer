@@ -1,6 +1,9 @@
 # stl imports
 import requests
 
+# local imports
+from constants import *
+
 class TicketHandler:
     # this class defines all ticket related functions
 
@@ -11,7 +14,7 @@ class TicketHandler:
         elif prev:
             redirect_url = prev
         else:
-            redirect_url = f'https://{ client_url }.zendesk.com/api/v2/tickets.json?page[size]=25'
+            redirect_url = f'https://{ client_url }.zendesk.com/api/v2/tickets.json?page[size]={Constants.items_per_page}'
         headers={'Authorization': f'Bearer { access_token }'}
         tickets = requests.get(redirect_url, headers=headers)
         if tickets.ok:
