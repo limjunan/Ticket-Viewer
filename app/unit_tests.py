@@ -36,7 +36,7 @@ class testAPIHandling(unittest.TestCase):
     @patch('ticket_handler.requests.get')
     def test_getTickets_OK_Response(self, mock_get):
         # configure the mock to return mock tickets json
-        with open("mock_tickets.json") as f:
+        with open("mocks/mock_tickets.json") as f:
             mock_tickets = json.load(f)
 
         mock_get.return_value = Mock(ok=True)
@@ -44,7 +44,7 @@ class testAPIHandling(unittest.TestCase):
 
         response = TicketHandler.getTickets('random access token', 'random url')
 
-        self.assertListEqual(response, mock_tickets['tickets'])
+        self.assertListEqual(response['tickets'], mock_tickets['tickets'])
 
     @patch('ticket_handler.requests.get')
     def test_getTickets_NotOK_Response(self, mock_get):
@@ -58,7 +58,7 @@ class testAPIHandling(unittest.TestCase):
     @patch('ticket_handler.requests.get')
     def test_getTicket_OK_Response(self, mock_get):
         # configure the mock to return mock ticket json
-        with open("mock_ticket.json") as f:
+        with open("mocks/mock_ticket.json") as f:
             mock_ticket = json.load(f)
         
         mock_get.return_value = Mock(ok=True)
@@ -77,6 +77,27 @@ class testAPIHandling(unittest.TestCase):
 
         self.assertIsNone(response)
     
+    @patch('ticket_handler.requests.get')
+    def test_getTicketCount_OK_Response(self, mock_get):
+        # configure the mock to return mock count json
+        with open("mocks/mock_count.json") as f:
+            mock_count = json.load(f)
+        
+        mock_get.return_value = Mock(ok=True)
+        mock_get.return_value.json.return_value = mock_count
+
+        response = TicketHandler.getTicketCount('random access token', 'random url')
+
+        self.assertEqual(response, mock_count['count']['value'])
+    
+    @patch('ticket_handler.requests.get')
+    def test_getTicketCount_NotOK_Response(self, mock_get):
+        # configure the mock to not return a response with an OK status code.
+        mock_get.return_value.ok = False
+
+        response = TicketHandler.getTicketCount('random access token', 'random url')
+
+        self.assertIsNone(response)
 
     # API AUTHENTICATION UNIT TESTS
 
