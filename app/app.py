@@ -49,12 +49,33 @@ def authenticate():
 
 @app.route('/index')
 def listTickets():
-    tickets = TicketHandler.getTickets(session['access_token'], session['client_url'])
+
+    # retrieve ticket count 
+    ticket_count = TicketHandler.getTicketCount(session['access_token'], session['client_url'])
+    if ticket_count:
+        session['ticket_count'] = ticket_count
+    else:
+        flash('ERROR: unable to retrieve ticket count', 'error')
+
+    # pagination
+    if request.args.get('next'):
+        tickets = TicketHandler.getTickets(session['access_token'], session['client_url'], next=request.args.get('next'))
+    elif request.args.get('prev'):
+        tickets = TicketHandler.getTickets(session['access_token'], session['client_url'], prev=request.args.get('prev'))
+    else:
+        tickets = TicketHandler.getTickets(session['access_token'], session['client_url'])
+
     if tickets:
-        return render_template('index.html', title='Index', tickets=tickets)
+        if tickets['meta']['has_more']:
+            return render_template('index.html', title='Index', tickets=tickets['tickets'], 
+                                    next=tickets['links']['next'], prev=tickets['links']['prev'],
+                                    ticket_count=ticket_count)
+        else:
+            return render_template('index.html', title='Index', tickets=tickets['tickets'])
     else:
         flash('ERROR: Tickets retrieval not successful', 'error')
         return redirect(url_for('authenticate'))
+
 
 @app.route('/ticket', methods=['GET', 'POST'])
 def displayTicket():

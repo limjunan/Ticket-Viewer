@@ -2,11 +2,17 @@
 {% block content %}
 
 <h1>Zendesk Ticket Viewer</h1>
-
 {% for ticket in tickets %}
     <a href="{{ url_for('displayTicket', ticketid=ticket.id) }}">
         <p><strong>{{ ticket.id }}.</strong> {{ ticket.channel }} {{ ticket.subject }} Date: {{ ticket.updated_at[:-10] }}</p>
     </a>
 {% endfor %}
+
+{% if (tickets[0]['id'] != 1) %}
+    <a href="{{ url_for('listTickets', prev=prev) }}"><p>Prev</p></a>
+{% endif %}
+{% if next %}
+<a href="{{ url_for('listTickets', next=next) }}"><p>Next</p></a>
+{% endif %}
 
 {% endblock %}
