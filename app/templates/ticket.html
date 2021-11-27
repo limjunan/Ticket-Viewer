@@ -5,7 +5,11 @@
     <h1>Ticket {{ ticket['id'] }}</h1>
     <p>{{ ticket.subject }}</p>
     
-    <a href='{{ url_for("listTickets") }}'>Back</a>
+    {% if session['current_page'] %}
+        <a href='{{ url_for("listTickets", prev=session["current_page"]) }}'>Back</a>
+    {% else %}
+        <a href='{{ url_for("listTickets") }}'>Back</a>
+    {% endif %}
 </div>
 
 {% endblock %}

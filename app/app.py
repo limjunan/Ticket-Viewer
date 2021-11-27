@@ -60,8 +60,12 @@ def listTickets():
 
     # pagination
     if request.args.get('next'):
+        # store current page to redirect back from ticket
+        session['current_page'] = request.args.get('next')
         tickets = TicketHandler.getTickets(session['access_token'], session['client_url'], next=request.args.get('next'))
     elif request.args.get('prev'):
+        # store current page to redirect back from ticket
+        session['current_page'] = request.args.get('prev')
         tickets = TicketHandler.getTickets(session['access_token'], session['client_url'], prev=request.args.get('prev'))
     else:
         tickets = TicketHandler.getTickets(session['access_token'], session['client_url'])
@@ -84,6 +88,7 @@ def displayTicket():
         ticketid = request.args.get('ticketid')
         ticket = TicketHandler.getTicket(ticketid, session['access_token'], session['client_url'])
         if ticket:
+            print(ticket)
             return render_template('ticket.html', ticket=ticket, title='ticket')
         else:
             flash('ERROR: access code', 'error')
