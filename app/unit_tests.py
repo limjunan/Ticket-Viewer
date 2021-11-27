@@ -1,3 +1,8 @@
+'''
+    All unit tests are stored here
+    Mocks are stored under mocks directory
+'''
+
 # local imports
 from api_auth import *
 from api_url import API_URL
@@ -99,7 +104,7 @@ class testAPIHandling(unittest.TestCase):
 
         self.assertIsNone(response)
 
-    # API AUTHENTICATION UNIT TESTS
+
 
 
 

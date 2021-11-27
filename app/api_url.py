@@ -1,3 +1,7 @@
+'''
+    API checking functions are stored here
+'''
+
 # stl imports
 from urllib.parse import urljoin
 import requests
@@ -11,6 +15,7 @@ class API_URL:
         return f'https://{ subdomain }.zendesk.com'
 
     def checkAPIState(base_url):
+        # check if API is active
         response = requests.get(base_url)
         if response.ok:
             return response

@@ -1,3 +1,7 @@
+'''
+    All ticket related functions are stored in here
+'''
+
 # stl imports
 import requests
 
@@ -9,12 +13,14 @@ class TicketHandler:
 
     def getTickets(access_token, client_url, prev=None, next=None):
         # get tickets information json
+
+        # tickets pagination
         if next:
             redirect_url = next
         elif prev:
             redirect_url = prev
         else:
-            redirect_url = f'https://{ client_url }.zendesk.com/api/v2/tickets.json?page[size]={Constants.items_per_page}'
+            redirect_url = f'https://{ client_url }.zendesk.com/api/v2/tickets.json?page[size]={Constants.ITEMS_PER_PAGE}'
         headers={'Authorization': f'Bearer { access_token }'}
         tickets = requests.get(redirect_url, headers=headers)
         if tickets.ok:

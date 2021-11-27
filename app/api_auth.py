@@ -1,3 +1,7 @@
+'''
+    All API Authentication functions will be stored here
+'''
+
 # third party imports
 from flask import session, redirect
 

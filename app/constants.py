@@ -1,2 +1,6 @@
+'''
+    All constants to be stored here
+'''
+
 class Constants: 
-    items_per_page = 25 
+    ITEMS_PER_PAGE = 25 
