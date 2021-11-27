@@ -3,7 +3,7 @@
 '''
 
 # third party imports
-from flask import session, redirect
+from flask import redirect
 
 # stl imports
 import requests, json

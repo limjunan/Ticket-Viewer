@@ -96,7 +96,7 @@ def listTickets():
         return redirect(url_for('authenticate'))
 
 # individual ticket route
-@app.route('/ticket', methods=['GET', 'POST'])
+@app.route('/ticket', methods=['POST', 'GET'])
 def displayTicket():
     # indiv ticket error handling
     if session['access_token']:
