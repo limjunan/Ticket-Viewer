@@ -1,18 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h1>Zendesk Ticket Viewer</h1>
+<h3 class='list-title'>Ticket List</h3>
 <table class='tickets-list'>
     <tr>
         <th>ID</th>
         <th>Subject</th> 
         <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
     </tr>
     {% for ticket in tickets %}
-        <tr class='tickets-list-indiv' href="{{ url_for('displayTicket', ticketid=ticket.id) }}">
+        <tr class='tickets-list-indiv' data-href="{{ url_for('displayTicket', ticketid=ticket.id) }}">
             <td><strong>{{ ticket.id }}.</strong></td>
             <td>{{ ticket.subject }}</td>
             <td>{{ ticket.updated_at[:-10] }}</td>
+            <td>{{ ticket.updated_at[11:-1] }}</td>
+            <td> <span class='ticket-status-{{ticket.status}} ticket-status'>{{ ticket.status }}</span></td>
         </tr>
     {% endfor %}
 </table>
@@ -25,5 +29,17 @@
     <a href="{{ url_for('listTickets', next=next) }}"><p>Next</p></a>
     {% endif %}
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const rows = document.querySelectorAll("tr[data-href]");
+    rows.forEach(row => {
+        row.addEventListener ( "click", () => {
+            window.location.href = row.dataset.href;
+        });
+    });
+})
+
+</script>
 
 {% endblock %}

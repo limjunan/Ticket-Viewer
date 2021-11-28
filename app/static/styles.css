@@ -93,3 +93,47 @@ p {font-family: 'ProximaNova';}
 .error-svg {
     padding: 8px;
 }
+
+/* Index tickets list */
+.tickets-list {
+    width: 100%;
+}
+
+tr {
+    border-bottom: 1px solid #d8dcde;
+    height: 40px;
+}
+
+tr:hover {
+    background-color: #edf7ff;
+    cursor: pointer;
+}
+
+td, th {
+    padding: 8px !important;
+}
+
+.ticket-status {
+    border-radius: 4px;
+    padding: 8px;
+}
+.ticket-status-open {
+    background-color: #e34f32;
+    color: #fff;
+}
+.ticket-status-new {
+    background-color: #ffd424;
+    color: #fff;
+}
+.ticket-status-pending {
+    background-color: #3091ec;
+    color: #fff;
+}
+.ticket-status-on-hold {
+    background-color: #000;
+    color: #fff;
+}
+.ticket-status-solved {
+    background-color: #49545c;
+    color: #fff;
+}
