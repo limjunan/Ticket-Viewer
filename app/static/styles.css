@@ -1,6 +1,8 @@
 body {
     margin: 0;
     color: #012b30 !important;
+    position: relative;
+    min-height: 100vh;
 }
 
 @font-face {
@@ -22,12 +24,24 @@ p {font-family: 'ProximaNova';}
     color: #fff;
     padding: 8px;
 }
+.content-wrap {
+    padding-bottom: 107px;
+}
+.footer {
+    background-color: #012b30;
+    color: #fff;
+    padding: 24px;
+    text-align: right;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
 
 /* Form related */
 .authenticate-form {
     display: flex;
     justify-content: center;
-    margin-top: 60px;
+    margin: 60px 0;
 }
 
 .form-title {
@@ -110,7 +124,7 @@ tr {
     height: 40px;
 }
 
-tr:hover {
+.tickets-list-indiv:hover {
     background-color: #edf7ff;
     cursor: pointer;
 }
@@ -122,6 +136,8 @@ td, th {
 .ticket-status {
     border-radius: 4px;
     padding: 8px;
+    display: flex;
+    justify-content: center;
 }
 .ticket-status-open {
     background-color: #e34f32;
@@ -148,7 +164,7 @@ td, th {
 .tickets-list-pagination {
     display: flex;
     justify-content: center;
-    padding: 8px;
+    padding: 8px 12px;
 }
 .pagination-scroller{
     padding: 8px;

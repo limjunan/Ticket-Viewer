@@ -21,10 +21,10 @@
 <body>
     <header class='container-fluid header'>
         <div>
-            <h3><img src='static/assets/svg/zendesk-logo.svg'> Ticket Viewer</h2>
+            <h3><img src='static/assets/svg/zendesk-logo.svg'> Ticket Viewer</h3>
         </div>
     </header>
-    <div class='container'>
+    <div class='container content-wrap'>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class=flashes>
@@ -36,5 +36,11 @@
     {% endwith %}
     {% block content %}{% endblock %}
     </div>
+    <footer class='container-fluid footer'>
+        <div>
+            <p>This application was created for the Zendesk Intern Coding Challenge Singapore 2021.</p>
+            <p >Designed using the <a href='https://garden.zendesk.com' style='color:#fff;text-decoration: underline;'>Zendesk Garden</a> design system <img src='static/assets/svg/zendesk-garden.svg' style='padding-left: 2px;'></p>
+        </div>
+    </footer>
 </body>
 </html>
