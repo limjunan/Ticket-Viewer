@@ -33,7 +33,7 @@ def authenticate():
 
         # error handling for down api
         if API_URL.checkAPIState(API_URL.getSubdomainURL(session['client_url'])) is None:
-            flash('<b>Error</b></br> API is down', 'error')
+            flash('<b>Error</b></br> Either the API is down, or you could not be authenticated', 'error')
             return render_template('authenticate.html', form=AuthenticationForm(), title='Authentication')
 
         # get authorization code
@@ -55,7 +55,7 @@ def authenticate():
             session['access_token'] = accessTokenJSON['access_token']
             return(redirect(url_for('listTickets')))
         else:
-            flash('<b>Error</b></br> invalid client secret', 'error')
+            flash('<b>Error</b></br> Invalid client secret', 'error')
             return render_template('authenticate.html', form=AuthenticationForm(), title='Authentication')
 
     return render_template('authenticate.html', form=authenticationForm, title='Authentication')
@@ -69,7 +69,7 @@ def listTickets():
     if ticket_count: # ticket count error handling
         session['ticket_count'] = ticket_count
     else:
-        flash('<b>Error</b></br> unable to retrieve ticket count', 'error')
+        flash('<b>Error</b></br> Unable to retrieve ticket count', 'error')
 
     # pagination when retrieving tickets
     if request.args.get('next'):
@@ -106,10 +106,10 @@ def displayTicket():
             print(ticket)
             return render_template('ticket.html', ticket=ticket, title='ticket')
         else:
-            flash('<b>Error</b></br> access code', 'error')
+            flash('<b>Error</b></br> Invalid access code', 'error')
             return redirect(url_for('authenticate'))
     else:
-        flash('<b>Error</b></br> access code', 'error')
+        flash('<b>Error</b></br> Invalid access code', 'error')
         return redirect(url_for('authenticate'))
 
 

@@ -2,14 +2,31 @@
 {% block content %}
 
 <div>
-    <h1>Ticket {{ ticket['id'] }}</h1>
-    <p>{{ ticket.subject }}</p>
-    
+    <div class='ticket'>
+        <div class='ticket-header'>
+            <h3>Ticket ID: {{ ticket.id }}</h3>
+            <p>{{ ticket.updated_at[:-10] }} {{ ticket.updated_at[11:-1] }}</p>
+        </div>
+        <div class='ticket-body'>
+            <p id='ticket-subject'>{{ ticket.subject }}</p>
+            <p>{{ ticket.description }}</p>
+            <div class='ticket-tags'>
+                {% for tag in ticket.tags %}
+                <span class='ticket-tag'>{{ tag }}</span>
+                {% endfor %}
+            </div>
+            <p class='ticket-status ticket-status-{{ticket.status}}' style='margin: 16px 4px;'>Status: {{ ticket.status }}</p>
+        </div>
+    </div>
+
+        
+    <div class='ticket-back-btn-wrapper'>
     {% if session['current_page'] %}
-        <a href='{{ url_for("listTickets", prev=session["current_page"]) }}'>Back</a>
+        <a class='c-btn' id='ticket-back-btn' href='{{ url_for("listTickets", prev=session["current_page"]) }}'>Return</a>
     {% else %}
-        <a href='{{ url_for("listTickets") }}'>Back</a>
+        <a class='c-btn' id='ticket-back-btn' href='{{ url_for("listTickets") }}'>Return</a>
     {% endif %}
+    </div>
 </div>
 
 {% endblock %}

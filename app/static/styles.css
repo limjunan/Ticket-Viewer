@@ -174,3 +174,49 @@ td, th {
 .pagination-scroller:hover {
     background-color: #e9ebed;
 }
+
+/* Ticket */
+.ticket {
+    border: 1px solid #d8dcde;
+    padding: 16px;
+    margin: 32px auto;
+    width: 60%;
+}
+.ticket-header {
+    border-bottom: 1px solid #d8dcde;
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.ticket-body {
+    padding-top: 16px;
+}
+#ticket-subject {
+    font-size: 120%;
+    font-weight: 600;
+}
+.ticket-tags {
+    display: flex;
+}
+.ticket-tag {
+    border-radius: 4px;
+    background-color: #d8dcde;
+    padding: 4px 8px;
+    margin: 4px;
+    opacity: 0.8
+}
+.ticket-back-btn-wrapper {
+    padding-bottom: 32px;
+    display: flex;
+    justify-content: center;
+}
+#ticket-back-btn {
+    width: 10%;
+    color: #1f73b7;
+    background-color: transparent;
+    border: 1px solid #1f73b7;
+}
+#ticket-back-btn:hover {
+    background-color: #edf7ff;
+}
