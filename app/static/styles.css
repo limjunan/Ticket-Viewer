@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    color: #012b30 !important;
+}
+
+@font-face {
+    font-family: 'SharpSansNo1-Bold';
+    src: url('assets/SharpSansNo1-Bold.otf') format('opentype'),
+         url('assets/SharpSansNo1-Bold.ttf') format('ttf')
+}
+
+@font-face {
+    font-family: 'ProximaNova';
+    src: url('assets/ProximaNovaFont.otf') format('opentype')
+}
+
+h1, h2, h3, h4, h5, h6 {font-family: 'SharpSansNo1-Bold'}
+p {font-family: 'ProximaNova';}
+
+/* Form related */
+.authenticate-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+}
+
+.form-title {
+    font-size: 135%;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+}
+
+#client_secret, #client_url, #client_id {
+    width: 250px;
+    border: 1px solid #d8dcde;
+    border-radius: 4px;
+    background-color: transparent;
+    padding: 0;
+    min-height: 1em;
+    height: 38px;
+    padding: calc(10 / 14 * 1em) calc(16 / 14 * 1em);
+}
+
+/* Buttons */
+.c-btn {
+    display: inline-block;
+    /* prettier-ignore */
+    transition:
+      border-color .25s ease-in-out,
+      box-shadow .1s ease-in-out,
+      background-color .25s ease-in-out,
+      color .25s ease-in-out;
+    margin: 0;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none; /* [1] */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: inherit; /* [2] */
+    font-weight: var(--zd-font-weight-regular);
+    -webkit-font-smoothing: subpixel-antialiased;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-touch-callout: none;
+    border-color: transparent;
+    background-color: #1f73b7;    ;
+    color: #fff;
+    padding: 0 calc(27 / 14 * 1em);
+    height: 40px;
+    line-height: 38px;
+    width: 100%;
+  }
+  .c-btn:hover {
+    border-color: transparent;
+    background-color: #144a75;
+    color: #fff;    
+  }
