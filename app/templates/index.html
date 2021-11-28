@@ -23,10 +23,14 @@
 
 <div class='tickets-list-pagination'>
     {% if (tickets[0]['id'] != 1) and prev %}
-        <a href="{{ url_for('listTickets', prev=prev) }}"><p>Prev</p></a>
+    <div class='pagination-scroller'>
+        <a href="{{ url_for('listTickets', prev=prev) }}"><img src='static/assets/svg/chevron-left-stroke.svg'> Previous </a>
+    </div>
     {% endif %}
     {% if (tickets[-1]['id'] != ticket_count) and next %}
-    <a href="{{ url_for('listTickets', next=next) }}"><p>Next</p></a>
+    <div class='pagination-scroller'>
+        <a href="{{ url_for('listTickets', next=next) }}"> Next <img src='static/assets/svg/chevron-right-stroke.svg'></a>
+    </div>
     {% endif %}
 </div>
 

@@ -137,3 +137,18 @@ td, th {
     background-color: #49545c;
     color: #fff;
 }
+
+/* Pagination */
+.tickets-list-pagination {
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+}
+.pagination-scroller{
+    padding: 8px;
+    margin: 8px;
+    border-radius: 4px;
+}
+.pagination-scroller:hover {
+    background-color: #e9ebed;
+}
