@@ -2,18 +2,28 @@
 {% block content %}
 
 <h1>Zendesk Ticket Viewer</h1>
-{% for ticket in tickets %}
-    <a href="{{ url_for('displayTicket', ticketid=ticket.id) }}">
-        <p><strong>{{ ticket.id }}.</strong> {{ ticket.channel }} {{ ticket.subject }} Date: {{ ticket.updated_at[:-10] }}</p>
-    </a>
-{% endfor %}
+<table class='tickets-list'>
+    <tr>
+        <th>ID</th>
+        <th>Subject</th> 
+        <th>Date</th>
+    </tr>
+    {% for ticket in tickets %}
+        <tr class='tickets-list-indiv' href="{{ url_for('displayTicket', ticketid=ticket.id) }}">
+            <td><strong>{{ ticket.id }}.</strong></td>
+            <td>{{ ticket.subject }}</td>
+            <td>{{ ticket.updated_at[:-10] }}</td>
+        </tr>
+    {% endfor %}
+</table>
 
-
-{% if (tickets[0]['id'] != 1) and prev %}
-    <a href="{{ url_for('listTickets', prev=prev) }}"><p>Prev</p></a>
-{% endif %}
-{% if (tickets[-1]['id'] != ticket_count) and next %}
-<a href="{{ url_for('listTickets', next=next) }}"><p>Next</p></a>
-{% endif %}
+<div class='tickets-list-pagination'>
+    {% if (tickets[0]['id'] != 1) and prev %}
+        <a href="{{ url_for('listTickets', prev=prev) }}"><p>Prev</p></a>
+    {% endif %}
+    {% if (tickets[-1]['id'] != ticket_count) and next %}
+    <a href="{{ url_for('listTickets', next=next) }}"><p>Next</p></a>
+    {% endif %}
+</div>
 
 {% endblock %}

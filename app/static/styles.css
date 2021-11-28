@@ -5,13 +5,13 @@ body {
 
 @font-face {
     font-family: 'SharpSansNo1-Bold';
-    src: url('assets/SharpSansNo1-Bold.otf') format('opentype'),
-         url('assets/SharpSansNo1-Bold.ttf') format('ttf')
+    src: url('assets/fonts/SharpSansNo1-Bold.otf') format('opentype'),
+         url('assets/fonts/SharpSansNo1-Bold.ttf') format('ttf')
 }
 
 @font-face {
     font-family: 'ProximaNova';
-    src: url('assets/ProximaNovaFont.otf') format('opentype')
+    src: url('assets/fonts/ProximaNovaFont.otf') format('opentype')
 }
 
 h1, h2, h3, h4, h5, h6 {font-family: 'SharpSansNo1-Bold'}
@@ -26,7 +26,7 @@ p {font-family: 'ProximaNova';}
 
 .form-title {
     font-size: 135%;
-    padding: 4px;
+    padding: 8px;
     display: flex;
     justify-content: center;
 }
@@ -62,7 +62,6 @@ p {font-family: 'ProximaNova';}
     text-overflow: ellipsis;
     white-space: nowrap;
     font-family: inherit; /* [2] */
-    font-weight: var(--zd-font-weight-regular);
     -webkit-font-smoothing: subpixel-antialiased;
     box-sizing: border-box;
     user-select: none;
@@ -80,3 +79,17 @@ p {font-family: 'ProximaNova';}
     background-color: #144a75;
     color: #fff;    
   }
+
+/* Flash messages */
+.error {
+    background-color: #fff0f1;
+    color: #681219;
+    border: 1px solid #f5b5ba;
+    border-radius: 4px;
+    padding: 16px;
+    margin: 8px;
+    display: flex;
+}
+.error-svg {
+    padding: 8px;
+}

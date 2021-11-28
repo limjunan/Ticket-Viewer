@@ -33,7 +33,7 @@ def authenticate():
 
         # error handling for down api
         if API_URL.checkAPIState(API_URL.getSubdomainURL(session['client_url'])) is None:
-            flash('ERROR: API is down', 'error')
+            flash('<b>Error</b></br> API is down', 'error')
             return render_template('authenticate.html', form=AuthenticationForm(), title='Authentication')
 
         # get authorization code
@@ -55,7 +55,7 @@ def authenticate():
             session['access_token'] = accessTokenJSON['access_token']
             return(redirect(url_for('listTickets')))
         else:
-            flash('ERROR: invalid client secret', 'error')
+            flash('<b>Error</b></br> invalid client secret', 'error')
             return render_template('authenticate.html', form=AuthenticationForm(), title='Authentication')
 
     return render_template('authenticate.html', form=authenticationForm, title='Authentication')
@@ -69,7 +69,7 @@ def listTickets():
     if ticket_count: # ticket count error handling
         session['ticket_count'] = ticket_count
     else:
-        flash('ERROR: unable to retrieve ticket count', 'error')
+        flash('<b>Error</b></br> unable to retrieve ticket count', 'error')
 
     # pagination when retrieving tickets
     if request.args.get('next'):
@@ -92,7 +92,7 @@ def listTickets():
         else:
             return render_template('index.html', title='Index', tickets=tickets['tickets'])
     else:
-        flash('ERROR: Tickets retrieval not successful', 'error')
+        flash('<b>Error</b></br> Tickets retrieval not successful', 'error')
         return redirect(url_for('authenticate'))
 
 # individual ticket route
@@ -106,10 +106,10 @@ def displayTicket():
             print(ticket)
             return render_template('ticket.html', ticket=ticket, title='ticket')
         else:
-            flash('ERROR: access code', 'error')
+            flash('<b>Error</b></br> access code', 'error')
             return redirect(url_for('authenticate'))
     else:
-        flash('ERROR: access code', 'error')
+        flash('<b>Error</b></br> access code', 'error')
         return redirect(url_for('authenticate'))
 
 

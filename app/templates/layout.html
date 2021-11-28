@@ -25,11 +25,11 @@
     <div class='container'>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            <ul class=flashes>
+            <div class=flashes>
             {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
+            <div class="{{ category }}"><img src='static/assets/svg/alert-red.svg' class='error-svg'><div class='flash-message'>{% autoescape false %}{{ message }}{% endautoescape %}</div></div>
             {% endfor %}
-            </ul>
+            </div>
         {% endif %}
     {% endwith %}
     {% block content %}{% endblock %}
