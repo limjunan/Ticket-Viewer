@@ -15,6 +15,7 @@
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
         <li><a href="#usage">Usage</a></li>
+        <li><a href="#unit-testing">Unit Testing</a></li>
       </ul>
     </li>
     <li><a href="#challenge-requirements">Challenge Requirements</a></li>
@@ -52,13 +53,49 @@ A ticket viewer web application built for the Zendesk Coding Challenge 2022, Sin
 ### Prerequisites
 
 - Python 3
+- Git
 
 ### Installation
 
+1. Clone the repository
+  ```
+  $ git clone https://github.com/limjunan/Ticket-Viewer.git
+  ```
+2. Navigate to the Ticket-Viewer directory
+  ```
+  $ cd Ticket-Viewer
+  ```
+3. Install external libraries in requirements.txt
+  ```
+  $ pip3 install -r requirements.txt
+  ```
+
 ### Usage
+
+1. Run the application on your local machine
+  ```
+  $ python3 app/app.py
+  ```
+2. Open up http://127.0.0.1:5000/ in your browser (or as specified in the output)
+
+3. Client ID and Secret are your OAUTH credentials
 
 ### Unit Testing
 
+1. Navigate to the app folder
+  ```
+  $ cd app
+  ```
+2. Run unit_tests.py (sample output below)
+  ```
+  $ python3 unit_tests.py
+  Your subdomain: zcclimjunan
+  ........
+  ----------------------------------------------------------------------
+  Ran 8 tests in 0.010s
+
+  OK
+  ```
 
 
 
@@ -93,5 +130,7 @@ A ticket viewer web application built for the Zendesk Coding Challenge 2022, Sin
 Bryan Lim - [LinkedIn](https://www.linkedin.com/in/lim-jun-an-bryan-068bba185/) - bryanlim080302@gmail.com
 
 Project Link: [https://github.com/limjunan/Ticket-Viewer](https://github.com/limjunan/Ticket-Viewer)
+
+🙀
 
 <p align="right">(<a href="#top">back to top</a>)</p>
