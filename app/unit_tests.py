@@ -5,7 +5,6 @@
 
 # local imports
 from api_auth import *
-from api_url import API_URL
 from ticket_handler import TicketHandler
 from api_auth import ApiAuthentication
 
@@ -15,23 +14,23 @@ from unittest.mock import Mock, patch
 
 class testAPIHandling(unittest.TestCase):
 
-    # API CHECKING UNIT TESTS (api_url.py)
+    # API AUTHENTICATION UNIT TESTS (api_auth.py)
 
-    @patch('api_url.requests.get')
+    @patch('api_auth.requests.get')
     def test_CheckAPIState_OK_Response(self, mock_get):
         # configure the mock to return a response with an OK status code.
         mock_get.return_value.ok = True
 
-        response = API_URL.checkAPIState(API_URL.getSubdomainURL(subdomain))
+        response = ApiAuthentication.checkAPIState(ApiAuthentication.getSubdomainURL(subdomain))
 
         self.assertIsNotNone(response)
 
-    @patch('api_url.requests.get')
+    @patch('api_auth.requests.get')
     def test_CheckAPIState_NotOK_Response(self, mock_get):
         # configure the mock to return a response with an OK status code.
         mock_get.return_value.ok = False
 
-        response = API_URL.checkAPIState(API_URL.getSubdomainURL(subdomain))
+        response = ApiAuthentication.checkAPIState(ApiAuthentication.getSubdomainURL(subdomain))
 
         self.assertIsNone(response)
 

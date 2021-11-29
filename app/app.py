@@ -62,6 +62,14 @@ def authenticate():
 # list tickets route
 @app.route('/index')
 def listTickets():
+
+    # access token error handling
+    try:
+        session['access_token']
+    except KeyError:
+        flash('<b>Error</b></br> Invalid access token', 'error')
+        return redirect(url_for('authenticate'))     
+
     
     # retrieve ticket count 
     ticket_count = TicketHandler.getTicketCount(session['access_token'], session['client_url'])
@@ -98,18 +106,21 @@ def listTickets():
 @app.route('/ticket', methods=['POST', 'GET'])
 def displayTicket():
     # indiv ticket error handling
-    if session['access_token']:
-        ticketid = request.args.get('ticketid')
-        ticket = TicketHandler.getTicket(ticketid, session['access_token'], session['client_url'])
-        if ticket:
-            print(ticket)
-            return render_template('ticket.html', ticket=ticket, title='ticket')
-        else:
-            flash('<b>Error</b></br> Invalid access code', 'error')
-            return redirect(url_for('authenticate'))
+    try:
+        session['access_token']
+    except KeyError:
+        flash('<b>Error</b></br> Invalid access code', 'error')
+        return redirect(url_for('authenticate'))
+        
+    ticketid = request.args.get('ticketid')
+    ticket = TicketHandler.getTicket(ticketid, session['access_token'], session['client_url'])
+    if ticket:
+        print(ticket)
+        return render_template('ticket.html', ticket=ticket, title='ticket')
     else:
         flash('<b>Error</b></br> Invalid access code', 'error')
         return redirect(url_for('authenticate'))
+
 
 
 if __name__ == '__main__':
