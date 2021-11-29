@@ -28,8 +28,20 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-A ticket viewer web application built for the Zendesk Coding Challenge 2022, Singapore. Built with the [Flask](https://flask.palletsprojects.com/en/2.0.x/) framework and designed using the [Zendesk Garden](https://garden.zendesk.com) design system.
+A ticket viewer web application built for the Zendesk Coding Challenge 2022, Singapore. Built with the [Flask](https://flask.palletsprojects.com/en/2.0.x/) framework and designed using the [Zendesk Garden](https://garden.zendesk.com) design system. Application is in the app folder.
 
+### Python files
+- app.py is where the main code lives
+- api_auth.py contains all authentication related functions
+- ticket_handler.py contains all ticket related functions
+- forms.py contains all WTForms
+- constants.py contains all constants
+- unit_test.py contains all unit tests, which are to be run
+
+### Folders
+- mocks folder contains all mocks for unit testing
+- static folder contains all CSS and assets (svgs, fonts etc.)
+- templates folder contains all HTML files to be routed to
 
 
 
@@ -37,14 +49,15 @@ A ticket viewer web application built for the Zendesk Coding Challenge 2022, Sin
 <!-- GETTING STARTED -->
 ## Getting Started
 
-
-
 ### Prerequisites
+
+- Python 3
 
 ### Installation
 
 ### Usage
 
+### Unit Testing
 
 
 
@@ -52,6 +65,7 @@ A ticket viewer web application built for the Zendesk Coding Challenge 2022, Sin
 <!-- Screenshots -->
 ## Screenshots
 
+![screenshot](screenshots/zendesk-screenshots.png)
 
 
 
