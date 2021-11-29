@@ -39,6 +39,13 @@ p {font-family: 'ProximaNova';}
     bottom: 0;
 }
 
+.error-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 60px;
+    align-items: center;
+}
+
 /* Form related */
 .authenticate-form {
     display: flex;

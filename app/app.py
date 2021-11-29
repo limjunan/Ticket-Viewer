@@ -121,6 +121,10 @@ def displayTicket():
         flash('<b>Error</b></br> Invalid access code', 'error')
         return redirect(url_for('authenticate'))
 
+# 404 page not found route
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 if __name__ == '__main__':

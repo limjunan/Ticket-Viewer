@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class='error-wrapper'>
+    <h2>404: page not found</h2>
+    <a href='{{ url_for("authenticate") }}' class='c-btn' id='ticket-back-btn'>Return</a>
+</div>
+
+{% endblock %}
