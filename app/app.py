@@ -9,7 +9,6 @@ from flask import Flask, render_template, redirect, request, session, flash, url
 from forms import AuthenticationForm
 from api_auth import *
 from ticket_handler import *
-from api_url import *
 from constants import *
 
 app = Flask(__name__)
@@ -32,7 +31,7 @@ def authenticate():
         session['client_url'] = authenticationForm.client_url.data
 
         # error handling for down api
-        if API_URL.checkAPIState(API_URL.getSubdomainURL(session['client_url'])) is None:
+        if ApiAuthentication.checkAPIState(ApiAuthentication.getSubdomainURL(session['client_url'])) is None:
             flash('<b>Error</b></br> Either the API is down, or you could not be authenticated', 'error')
             return render_template('authenticate.html', form=AuthenticationForm(), title='Authentication')
 
@@ -63,7 +62,7 @@ def authenticate():
 # list tickets route
 @app.route('/index')
 def listTickets():
-
+    
     # retrieve ticket count 
     ticket_count = TicketHandler.getTicketCount(session['access_token'], session['client_url'])
     if ticket_count: # ticket count error handling
