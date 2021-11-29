@@ -11,6 +11,21 @@ import requests, json
 class ApiAuthentication:
     # this class defines all authentication related functions
 
+    def getSubdomainURL(subdomain):
+        return f'https://{ subdomain }.zendesk.com'
+
+    def checkAPIState(base_url):
+        # check if API or subdomain is active
+        try:
+            response = requests.get(base_url, timeout=10)
+        except requests.exceptions.ConnectionError:
+            return None
+
+        if response.ok:
+            return response
+        else:
+            return None
+
     def getAuthorizationCode(client_id, client_url):
         # get oauth code
         redirect_url = f'https://{ client_url }.zendesk.com/oauth/authorizations/new?response_type=code&redirect_uri=http://127.0.0.1:5000&client_id={ client_id }&scope=read'
