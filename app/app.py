@@ -118,7 +118,7 @@ def displayTicket():
         print(ticket)
         return render_template('ticket.html', ticket=ticket, title='ticket')
     else:
-        flash('<b>Error</b></br> Invalid access code', 'error')
+        flash('<b>Error</b></br> Ticket not found', 'error')
         return redirect(url_for('authenticate'))
 
 # 404 page not found route
