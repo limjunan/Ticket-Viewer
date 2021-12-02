@@ -19,6 +19,7 @@
       </ul>
     </li>
     <li><a href="#challenge-requirements">Challenge Requirements</a></li>
+    <li><a href="#design-considerations">Design Considerations</a></li>
     <li><a href="#screenshots">Screenshots</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -99,15 +100,6 @@ A ticket viewer web application built for the Zendesk Coding Challenge 2022, Sin
 
 
 
-<!-- Screenshots -->
-## Screenshots
-
-![screenshot](screenshots/zendesk-screenshots.png)
-
-
-
-
-
 
 <!-- Requirements -->
 ## Challenge Requirements
@@ -119,6 +111,45 @@ A ticket viewer web application built for the Zendesk Coding Challenge 2022, Sin
 - [x] Page through tickets when more than 25 are returned
 - [x] Include a README with installation and usage instructions
 - [x] Includes tests
+
+
+
+
+
+
+
+<!-- Considerations -->
+## Design Considerations
+
+- Language of choice: Python🐍.
+
+Besides being my go-to programming language, I decided on Python due to its simple syntax. The main audience of this application will be code reviewers, thus a simple syntax would make understanding written code much easier. 
+
+- Browser-Based UI
+
+I decided on a browser-based UI as opposed to the CLI option as I feel that I will enjoy this challenge much more doing this in the browser (it wouldn't be as mundane). Moreover, it would also give me the freedom to style the interface, which will be touched on below. Although the main users of the applications are the reviewers, I am sure everyone appreciates a pretty interface.
+
+- Flask Framework
+
+Having decided on using Python on a browser-based UI, it was a decision between the Flask and Django frameworks. I ended up choosing Flask as it was more suited for rapid development (a one week deadline). It is also a minimal platform, perfect for developing something for a small coding challenge. 
+
+- Cursor-Based Pagination
+
+The Zendesk Tickets API supports both cursor-based and offset pagination. Although offset pagination allows for users to choose specific pages, I felt that users have no need for that functionality. Therefore, cursor-based was the clear winner, as it is much faster when used with much bigger datasets, in the case of having thousands of tickets; and it allows for more accurate data when fetching from the API. 
+
+- UI Design
+
+I designed the UI as I feel that even though the main users of my application will be the reviewers, I should assume them to be the end-users. Thus, to maximize customer experience, a beautiful and easy-to-use interface is important. I wanted to make my application feel like part of the Zendesk ecosystem, so I used the Zendesk Garden design system as a base in designing the UI.
+
+
+
+
+<!-- Screenshots -->
+## Screenshots
+
+![screenshot](screenshots/zendesk-screenshots.png)
+
+
 
 
 
